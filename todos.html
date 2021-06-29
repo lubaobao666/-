@@ -1,0 +1,60 @@
+<html>
+<body>
+<div id="todo-list-example">
+  <label for="new-todo">Add a todo</label>
+  <input 
+	v-model="newTodo"
+	id="new-todo"
+	placeholder="E.g. Feed the cat"
+  > 
+  <button @click="addNewTodo">Add</button>
+  <ul>
+    <li
+	  is="todo-item"
+	  v-for="item in todos"
+	  :key = "item.id"
+	  :item = "item"
+	  v-on:remove="todos.splice(index, 1)"
+	>
+	</li
+  </ul>
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.13/dist/vue.js"></script>
+<script >
+  Vue.component('todo-item', {
+    props: ['item'],
+	template: '\
+    <li>\
+      {{ item.title }}\
+      <button v-on:click="$emit(\'remove\')">Remove</button>\
+    </li>\
+  ',
+  })
+  
+  var app = new Vue({
+    el: '#todo-list-example',
+    data: {
+	  todos: [
+	    {id: 1, title: 'Do the dishes'},
+		{id: 2, title: 'Take out the trash'},
+		{id: 3, title: 'Mow the lawn'}
+	  ],
+	  newTodo: '',
+	  nextTodoId: 4
+	},
+	methods: {
+	  addNewTodo() {
+	    if (this.newTodo === '') {
+		  alert('请填写 newTodo');
+		  return;
+		}
+	    this.todos.push({id: this.nextTodoId++, title: this.newTodo})
+		this.newTodo = ''
+	  },
+	}
+  })
+</script>
+</html>

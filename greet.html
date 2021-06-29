@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+
+<body>
+
+<div id="example-1">
+  <button @click="greet">Greet</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+
+var app = new Vue({
+  el: "#example-1",
+  data: {
+    name: "Vue.js"
+  },
+  methods: {
+    greet(event) {
+	  alert('Hello ' + this.name);
+	  alert(event.target.tagName)
+	}
+  }
+})
+
+</script>
+
+</body>
+</html>
